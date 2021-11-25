@@ -1,0 +1,98 @@
+CHAPITRE 4
+	PATTERN MATCHING
+
+	- - - - - - - - - - - - - - - - - -
+		let rec fact = function
+			| 0 -> 1
+			| i -> i * fact (i - 1)
+		;;
+		- - - - - - - - - - - - - - - - - -
+		
+	Interprétation
+	 - Les mi répertorient toutes les formes possibles de l'argument.
+	- - - - - - - - - - - - - - - - - -
+		function
+			| m1 -> e1
+			| m2 -> e2
+			...
+			| mn -> en
+	- - - - - - - - - - - - - - - - - -
+
+	EXERICE 4.1
+		Inefficace :: complexité en 0(2 ** n)
+		
+		- - - - - - - - - - - - - - - - - - - - - - -
+			let rec fibo = function
+				| 0 -> 1
+				| 1 -> 1
+				| i -> fibo ( i - 1 ) + fibo ( i - 2 )
+			;;
+		- - - - - - - - - - - - - - - - - - - - - - -
+		
+	EXERCICE 4.2
+		- - - - - - - - - - - - - - - - - - - - - - -
+			let pi_sur_deux = 2. *. atan 1.;;
+		
+			let rec pol_of_cart = function
+				| (0.0, y) -> 
+					if y > 0.0 then (y, pi_sur_deux)
+					else (-.y, -.pi_sur_deux)
+				| (x, y) -> (sqrt (x *. x +. y *. y), atan (y /. x))
+			;;
+		- - - - - - - - - - - - - - - - - - - - - -
+		
+	EXERCICE 4.3
+		- - - - - - - - - - - - - - - - - - - - - - -
+			let implique = function
+				| (true, false) -> false
+				| _ -> true
+		- - - - - - - - - - - - - - - - - - - - - -
+		
+Chapitre 5 : Les listes
+
+La liste est un type récursif homogène.
+Elle a :
+	- une valeur de base
+		# [];;
+		- : 'a list = []
+	Tant que la liste est vide, elle est suceptible de contenir des éléments de n'importe quel type : 'a se lit alpha.
+	
+	- un constructeur
+		# 'b' :: [];;
+		- : char list = []
+	Dès que la liste contient un élément, son type est fixé.
+	
+	- sucre syntaxique. Une liste construite depuis la liste vide :
+		# 'c' :: 'b' :: [];;
+		- : char list = ['c'; 'b']
+	est affichée abrégéé avec des points-virgules.
+		# [("Riri", 12); ("Fifi", 10);];;
+		
+5.2 Filtrage des listes
+
+Principe de récurrence
+
+	let rec sum_list = function
+		| [] -> 0
+		| hd::tl -> hd + sum_list tl
+	;;
+	
+Attention ! Pour comprendre une récursivité, inutile d'essayer de suivre soi-même les appels récursifs (on s'y perd vite). Il suffit ici de se convaincre qu'on a défini une récurrence correcte :
+
+- la somme des éléments d'une liste vide est zéro
+- si on connaît la valeur v de la somme des éléments d'une liste tl, la somme des éléments de hd:tl est hd + v
+
+Forme la plus courante d'une fonction à n+1 arguments
+	let rec nom_fonction arg1 ... argn = function
+		| []   -> ... valeur pour le cas de base
+		| x::l -> ... nom_fonction arg1' ... argn' x
+	;;
+
+Opérateur de concaténation de liste
+
+	[1;2;3] @ [4,5,6];;
+Ceci dit, ( @ ) est une fonction et non un constructeur comme ::. Il ne peut dont pas entrer dan la constitution d'un motif. De plus, sa complexité est linéaire en la taille de son premier argument. L'exemple précédent s'éxécute de la même manière que :
+	1 :: 2 :: 3 :: [4; 5; 6];;
+La complexité de :: est constante.
+
+5.3. Listes et paramètres fonctionnels

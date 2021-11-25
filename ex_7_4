@@ -1,0 +1,6 @@
+let f1 a b c = a + b + c;;
+let f2 a b   = function c -> a + b + c;;
+let f3 a f   = f (a + 1) + 1;;
+let f5 f a   = f (a + 1) + 1;;
+let f7 f     = (f 1 2) + 1;;
+let f8 f     = f (function x -> x + 1) + 1;;

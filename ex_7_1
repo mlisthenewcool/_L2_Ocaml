@@ -1,0 +1,14 @@
+let f4 a b c = a (b (a, c));;
+val f4 :              ->                            ->    ->    = <fun>
+val f4 : ta           -> tb                         -> tc -> tr = <fun>
+val f4 : ta           -> (ta * tc -> tbac)          -> tc -> tr = <fun>
+val f4 : (tbac -> tr) -> (tbac -> tr) * tc -> tbac) -> tc -> tr = <fun>
+val f4 : ('a -> 'b)   -> (('a -> 'b) * 'c -> 'a)    -> 'c -> 'b = <fun>
+
+let f5 (a, b) c d = ((a b) c, d);;
+val f5 :                           ->    ->    ->           = <fun>
+val f5 : ta * tb                   -> tc -> td -> tr        = <fun>
+val f5 : ta * tb                   -> tc -> td -> tabc * td = <fun>
+val f5 : (tb -> tab) * tb          -> tc -> td -> tabc * td = <fun>
+val f5 : (tb -> (tc -> tabc)) * tb -> tc -> td -> tabc * td = <fun>
+val f5 : ('a -> 'b -> 'c)     * 'a -> 'b -> 'd -> 'c * 'd   = <fun>

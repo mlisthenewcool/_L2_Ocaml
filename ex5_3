@@ -1,0 +1,6 @@
+let rec map f = function
+	| []   -> []
+	| x::l -> f x :: map f l
+;;
+
+let sqr_list = map (fun i -> i * i);;

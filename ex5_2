@@ -1,0 +1,16 @@
+let rec rev_append l1 l2 =
+	match l1 with
+		| []     -> l2
+		| x::l   -> rev_append l (x::l2)
+;;
+
+let rec append l1 l2 =
+	match l1 with
+		| []   -> l2
+		| x::l -> x :: append l l2
+;;
+
+let rec concat = function
+	| [] -> []
+	| x::l -> x @ concat l
+;;

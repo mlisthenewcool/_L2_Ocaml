@@ -1,0 +1,16 @@
+val f1 : 'a list -> ('a * 'a) list
+
+val f2 : 'a list -> 'a list
+
+val f3 : ta -> tb -> tr
+val f3 : tc list -> te list -> tce list
+val f3 : (te -> tce) list -> te list -> tce list
+val f3 : ('a -> 'b) list -> 'a list -> 'b list
+
+val f4 : ('a list * 'a list) -> bool
+
+val f5 : 'a list -> 'a list -> 'a list
+
+val f6 : tx list -> ty list * tz list
+val f6 : (tu * tt) somme list -> tu list
+val f6 : ('a * 'b) somme list -> 'a list * 'b list

@@ -1,0 +1,29 @@
+let rec length_aux len = function
+	| []   -> len
+	| a::l -> length_aux (len + 1) l
+;;
+
+let length l = length_aux 0 l
+
+C'est la solution proposée par Xavier Leroy.
+- Récursivité **terminale**
+	Le compilateur transforme ce genre de récursivité en une simple boucle, sans maintenir une pile conservant les environnements intermédiaires.
+	C'est plus rapide à partir d'un certain rang.
+	
+	On reconnaît une récurivité terminale au fait que chaque branche, soit ne contient pas d'appel récursif, soit consiste en un simple appel récursif.
+
+let rec mem x = function
+	| []              -> false
+	| a::_ when a = x -> true
+	| _::l            -> mem x l
+;;
+	
+let rec mem x = function
+	| [] -> false
+	| a::l -> a = x || mem a l
+;;
+	
+let rec mem_assoc x = function
+	| []        -> false
+	| (a, _)::l -> a = x || mem_assoc x l
+;;

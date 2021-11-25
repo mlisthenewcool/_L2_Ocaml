@@ -1,0 +1,6 @@
+let rec iter f = function
+	| []   -> ()
+	| x::l -> let _ = f x in iter f l
+;;
+
+let print_int_list = iter (function x -> print_int x; print_string " ");

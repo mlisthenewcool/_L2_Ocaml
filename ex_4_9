@@ -1,0 +1,23 @@
+let rec pgcd a b = 
+	match (a/2, b/2, a mod 2, b mod 2) with
+		| _ when a = b -> a
+		| (0, _, 0, _) -> b
+		| (_, 0, _, 0) -> a
+		| (c, d, 0, 0) -> 2 * pgcd c d
+		| (c, _, 0, _) -> pgcd c b
+		| (_, d, _, 0) -> pgcd d a
+		| _ when a > b -> pgcd (a-b) b
+		| _            -> pgcd (b-a) a
+
+Version BG mais c'est le boulot du compilateur
+
+let rec pgcd a b = 
+	match (a lsr 1, b lsr 1, a land 1, b land 1) with
+		| _ when a = b -> a
+		| (0, _, 0, _) -> b
+		| (_, 0, _, 0) -> a
+		| (c, d, 0, 0) -> (pgcd c d) lsl 1
+		| (c, _, 0, _) -> pgcd c b
+		| (_, d, _, 0) -> pgcd d a
+		| _ when a > b -> pgcd (a-b) b
+		| _            -> pgcd (b-a) a

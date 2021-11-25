@@ -1,0 +1,27 @@
+let rec filter p = function
+	| [] -> []
+	| x::l when p x -> x :: filter p l
+	| _::l -> filter p l
+;;
+
+let partition p l = (filter p l, filter (function x -> not (p x)) l);;
+
+let partition p = function
+	| [] -> ([], [])
+	| x::l when p x -> (x :: fst (partition p l), snd (partition p l))
+	| x::l          -> (fst (partition p l), x :: snd (partition p l))
+;;
+
+let rec partition p = function
+	| [] -> ([], [])
+	| x::l when p x -> let (l1, l2) = partition p l in (x :: l1, l2)
+	| x::l          -> let (l1, l2) = partition p l in (l1, x :: l2)
+;;
+
+let partition p l = 
+	let rec urs acc1 acc2 = function
+		| [] -> (List.rev acc1, List.rev acc2)
+		| x::l when p x -> urs (x::acc1) acc2 l
+		| x::l          -> urs acc1 (x::acc2) l in
+		urs [] [] l
+;;

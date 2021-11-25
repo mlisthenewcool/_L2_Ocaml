@@ -1,0 +1,6 @@
+val i : 'a -> 'a (identité)
+val k : 'a -> 'b -> 'a (projection)
+
+val s : tx -> ty -> tz -> tr
+val s : (tz -> tyz -> tr) -> (tz -> tyz) -> tz -> tr
+val s : ('a -> 'b -> 'c) -> ('a -> 'b) -> 'a -> 'c 
